@@ -13,19 +13,19 @@ def db_connection():
     yield conn
     conn.close()
 
-def test_estudiante_insertados(db_connection):
+def test_alumnos_insertados(db_connection):
     with db_connection.cursor() as cur:
         cur.execute("SELECT COUNT(*) FROM estudiante;")
         count = cur.fetchone()[0]
         assert count == 10
 
-def test_maestro_insertados(db_connection):
+def test_maestros_insertados(db_connection):
     with db_connection.cursor() as cur:
         cur.execute("SELECT COUNT(*) FROM maestro;")
         count = cur.fetchone()[0]
         assert count == 10
 
-def test_grupo_insertados(db_connection):
+def test_grupos_insertados(db_connection):
     with db_connection.cursor() as cur:
         cur.execute("SELECT COUNT(*) FROM grupo;")
         count = cur.fetchone()[0]
@@ -50,8 +50,8 @@ def test_structure(db_connection):
             IN ('estudiante', 'maestro', 'grupo',
             'inscripcion', 'asistencia');
           '''
-    expected_tables = {'alumnos', 'maestros',
-                       'grupos', 'inscripciones',
+    expected_tables = {'estudiante', 'maestro',
+                       'grupo', 'inscripcion',
                        'asistencia'}
     with db_connection.cursor() as cur:
         cur.execute(sql)
